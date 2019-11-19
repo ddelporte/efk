@@ -1,6 +1,6 @@
 version: '3'
 services:
-  app:
+  app-main-1:
     build: app
     volumes:
       - ./app/main.py:/main.py
@@ -10,7 +10,19 @@ services:
       driver: "fluentd"
       options:
         fluentd-address: localhost:24224
-        tag: json.app.main
+        tag: json.app.main-1
+
+  app-main-2:
+    build: app
+    volumes:
+      - ./app/main.py:/main.py
+    links:
+      - fluentd
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: json.app.main-2
 
   app-log-plain:
     build: app-log-plain
