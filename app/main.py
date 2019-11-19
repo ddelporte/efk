@@ -14,17 +14,8 @@ logger_stderr = logging.getLogger()
 logger_stderr.setLevel(logging.DEBUG)
 logger_stderr.addHandler(logHandler_stderr)
 
-# logHandler_stdout = logging.StreamHandler(sys_stdout)
-# logHandler_stdout.setFormatter(formatter)
-# logger_stdout = logging.getLogger()
-# logger_stdout.setLevel(logging.DEBUG)
-# logger_stdout.addHandler(logHandler_stdout)
-
-
 logHandler_stdout = logging.StreamHandler(sys_stdout)
 logHandler_stdout.setFormatter(formatter)
-# logger_stdout = logging.getLogger()
-# logger_stdout.setLevel(logging.DEBUG)
 logger_stderr.addHandler(logHandler_stdout)
 
 
@@ -34,4 +25,4 @@ while True:
     logger_stderr.warning("warning level - message to display", extra={"log_info_level": "warning level", "ts": time.time()})
     logger_stderr.error("error level - message to display", extra={"log_info_level": "error level", "ts": time.time()})
     logger_stderr.fatal("fatal level - message to display", extra={"log_info_level": "fatal level", "ts": time.time()})
-    time.sleep(30)
+    time.sleep(60)

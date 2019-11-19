@@ -10,7 +10,19 @@ services:
       driver: "fluentd"
       options:
         fluentd-address: localhost:24224
-        tag: app.main
+        tag: json.app.main
+
+  app-log-plain:
+    build: app-log-plain
+    volumes:
+      - ./app-log-plain/main.py:/main.py
+    links:
+      - fluentd
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: plain.app.main-log-plain
 
   fluentd:
     build: ./fluentd
@@ -39,3 +51,14 @@ services:
       - "elasticsearch"
     ports:
       - "5601:5601"
+
+  redis:
+    image: redis:5
+    links:
+      - fluentd
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: app.redis
+
